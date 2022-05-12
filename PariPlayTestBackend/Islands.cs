@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 
 public static class Islands
 {
+    const int MIN_ISLAND_SIZE = 4;
+
 
     public static List<List<int>> GetIslands(int[,] matrix)
     {
@@ -20,7 +22,7 @@ public static class Islands
             {
                 int index = GetIndex(i, j, matrix);
 
-                //Check and save 0 positions
+                //Check and save wildcards
                 if (matrix[i, j] == 0)
                 {
                     wildcardPositions.Add(index);
@@ -56,7 +58,7 @@ public static class Islands
         foreach (int wildcardPosition in wildcardPositions)
             ProcessWildCard(matrix, wildcardPosition, islandMap);
 
-        return islandMap.Values.Distinct().ToList();
+        return islandMap.Values.Distinct().Where(island => island.Count >= MIN_ISLAND_SIZE).ToList();
     }
 
 
