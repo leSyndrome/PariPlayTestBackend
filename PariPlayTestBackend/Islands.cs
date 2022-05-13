@@ -99,13 +99,13 @@ public static class Islands
     }
 
     static int GetIndex(int i, int j, int[,] matrix) => i * matrix.GetLength(0) + j;
-    static int GetValueByIndex(int[,] matrix, int index) => matrix[GetRowByIndex(matrix, index), GetRowPositionByIndex(matrix, index)];
-    static int GetRowByIndex(int[,] matrix, int index) =>  index / matrix.GetLength(0);    
-    static int GetRowPositionByIndex(int[,] matrix, int index) =>  index % matrix.GetLength(0);
+    static int GetValueByIndex(int index, int[,] matrix) => matrix[GetRowByIndex(index, matrix), GetRowPositionByIndex(index, matrix)];
+    static int GetRowByIndex(int index, int[,] matrix) =>  index / matrix.GetLength(0);    
+    static int GetRowPositionByIndex(int index, int[,] matrix) =>  index % matrix.GetLength(0);
     static int GetIslandId(List<int> island, int[,] matrix) {
         foreach (int i in island)
         {
-            int id = GetValueByIndex(matrix, i);
+            int id = GetValueByIndex(i, matrix);
             if (id != 0)
                 return id;
         }
