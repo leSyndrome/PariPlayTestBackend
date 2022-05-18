@@ -12,15 +12,26 @@ namespace PariPlayTestBackend
 
         static void Main()
         {
+            // File
+            {
+                Console.WriteLine("Matrix loaded from file: ");
+                int[,] matrix = Matrix.ReadFromFile("matrix.txt");
+                Matrix.PrintMatrix(matrix);
+                Islands.PrintIslands(Islands.GetIslands(matrix), matrix);
+                Console.WriteLine("-----------------------------------------------------------");
+            }
+
+
+            // Random Matrix from
             int n = Matrix.DEFAULT_SIZE;
             int m = Matrix.DEFAULT_SIZE;
-
             while (true)
             {
                 GetInput(ref n, ref m);
                 int[,] matrix = Matrix.GenerateRandom(n, m);
                 Matrix.PrintMatrix(matrix);
                 Islands.PrintIslands(Islands.GetIslands(matrix), matrix);
+                Console.WriteLine("-----------------------------------------------------------");
             }
         }
 
