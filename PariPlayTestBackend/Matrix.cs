@@ -85,11 +85,11 @@ namespace PariPlayTestBackend.Matrix
         public static int GetPosition(this int[,] matrix, int x, int y) => x * matrix.GetLength(0) + y;
         public static int GetX(this int[,] matrix, int position ) => position / matrix.GetLength(0);
         public static int GetY(this int[,] matrix, int position) => position % matrix.GetLength(0);
-        public static int Left(this int[,] matrix, int position) => position - 1;
-        public static int Right(this int[,] matrix, int position) => position + 1;
-        public static int Top(this int[,] matrix, int position) => position - matrix.GetLength(0);
-        public static int Bottom(this int[,] matrix, int position) => position + matrix.GetLength(0);
-        public static bool IsInBounds(this int[,] matrix, int position) => position >= 0 && position <= matrix.Length;
+        public static int Left(this int cellPosition, int[,] matrix) => cellPosition - 1;
+        public static int Right(this int cellPosition, int[,] matrix) => cellPosition + 1;
+        public static int Top(this int cellPosition, int[,] matrix) => cellPosition - matrix.GetLength(0);
+        public static int Bottom(this int cellPosition, int[,] matrix) => cellPosition + matrix.GetLength(0);
+        public static bool IsInBounds(this int cellPosition, int[,] matrix) => cellPosition >= 0 && cellPosition < matrix.Length;
         public static void ApplyBoundaries(ref int n) => n = n < MIN_SIZE ? MIN_SIZE : (n < MAX_SIZE ? n : MAX_SIZE);
     }
 }

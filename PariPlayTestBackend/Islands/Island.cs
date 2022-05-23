@@ -18,14 +18,31 @@ namespace PariPlayTestBackend.Islands
         {
             Matrix = matrix;
             Content = matrix.Get(cellPosition);
-            Cells.Add(cellPosition);
+            AddCell(cellPosition);
         }
 
-        public void AddCell(int cellPosition)
+        public virtual void AddCell(int cellPosition)
         {
-            if(!Matrix.IsInBounds(cellPosition))
+            if(!cellPosition.IsInBounds(Matrix))
                 throw new ArgumentOutOfRangeException(nameof(cellPosition));
-            Cells.Add(cellPosition);
+            if(!Cells.Contains(cellPosition))
+                Cells.Add(cellPosition);
+        }
+
+        public void Join(Island other)
+        {
+            if(Content != other.Content || Matrix != other.Matrix)
+                throw new ArgumentException(nameof(other));
+            Cells.Concat(other.Cells);
+            other = this;
+        }
+
+        public override string ToString()
+        {
+            string result = "Content: " + Content + "\tSize:  " + Cells.Count +  "\tCells: ";
+            foreach (int i in Cells)
+                result += " " + i;
+            return result;
         }
     }
 }
